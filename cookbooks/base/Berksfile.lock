@@ -1,0 +1,17 @@
+DEPENDENCIES
+  base
+    path: .
+    metadata: true
+
+GRAPH
+  7-zip (1.0.2)
+    windows (>= 1.2.2)
+  base (0.0.1)
+    homebrew (>= 0.0.0)
+  build-essential (2.3.1)
+    7-zip (>= 0.0.0)
+  chef_handler (1.3.0)
+  homebrew (2.0.5)
+    build-essential (>= 2.1.2)
+  windows (1.39.2)
+    chef_handler (>= 0.0.0)
