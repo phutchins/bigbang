@@ -2,7 +2,7 @@
 
 # To init from the web, run the following...
 ```
-source <(curl -s http://mywebsite.com/myscript.txt)
+source <(curl -s https://raw.githubusercontent.com/phutchins/bigbang/master/init.sh)
 ```
 
 # To run locally, simply execute the following

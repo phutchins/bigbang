@@ -1,6 +1,9 @@
 #!/usr/local/bin/bash
 
 # Init BigBang
+## Check out big bang to .bigbang (allow to choose location during setup?)
+
+##
 
 # Determine what OS we're running on
 unamestr=`uname`
