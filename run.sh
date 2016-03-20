@@ -22,6 +22,10 @@ echo "Installing/updating cookbooks"
 cd $BASE_DIR/cookbooks/base && berks install
 
 # Use berkshelf to vendor cookbooks into the vendor_cookbooks dir
+if ! [ -d $BASE_DIR/vendor_cookbooks ]; then
+  mkdir $BASE_DIR/vendor_cookbooks;
+fi
+
 cd $BASE_DIR/cookbooks/base && berks vendor $BASE_DIR/vendor_cookbooks
 
 # Run base bigbang recipe
