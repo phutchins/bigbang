@@ -8,7 +8,8 @@ echo "Running BigBang"
 
 # Set correct permissions on /usr/local for homebrew
 echo "Setting correct permissions for homebrew in /usr/local"
-sudo chown -R `whoami`:staff /usr/local
+# Should find a better way to do this so we don't have to ask for sudo pw every time
+# sudo chown -R `whoami`:staff /usr/local
 
 # Install Berkshelf
 if ! gem list berkshelf; then
