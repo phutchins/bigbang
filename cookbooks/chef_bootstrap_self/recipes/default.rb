@@ -8,7 +8,7 @@ TARGET = ENV['TARGET'] || node['chef_bootstrap_self']['defaults']['TARGET']
 METADATA_PARAMS = ['CHEF_RUN_LIST', 'CHEF_VALIDATION_BASE64', 'CHEF_SERVER', 'CHEF_VALIDATION_NAME']
 
 # If target is GCP, get metadata from the API and set defaults if it didn't exist
-MEATADATA_PARAMS.each do |param|
+METADATA_PARAMS.each do |param|
   if TARGET == "GCP"
     bash 'get_param' do
       code <<-EOH

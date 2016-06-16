@@ -55,7 +55,7 @@ gem_install()
   GEM=$1
   echo "Installing Gem $GEM"
 
-  gem list -i $GEM
+  gem list -i $GEM >/dev/null 2>&1
   if [ $? -ne 0 ] ; then
     gem install $GEM
   else
