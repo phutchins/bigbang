@@ -72,7 +72,7 @@ if ! bundle -v >/dev/null 2>&1; then
 fi
 
 # Install chef
-if ! gem list --local chef >/dev/null 2>&1; then
+if ! gem list -i chef >/dev/null 2>&1; then
   echo "Installing Chef..."
   gem install chef >/dev/null 2>&1
   echo "done."
@@ -83,7 +83,7 @@ fi
 # Check for ruby
 
 # Install chef-zero
-if ! gem list --local chef-zero >/dev/null 2>&1; then
+if ! gem list -i chef-zero >/dev/null 2>&1; then
   echo "Installing Chef Zero..."
   result=$(gem install chef-zero)
   if [[ "$result" != '0' ]] ; then
