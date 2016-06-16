@@ -28,6 +28,8 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='osx'
 fi
 
+echo "We're running on $platform"
+
 # Should break this and isinstalled() out into a lib file
 install()
 {
