@@ -1,2 +1,4 @@
-vendor_cookbooks
-nodes
+/vendor_cookbooks
+/vendor
+/nodes
+/.bundle

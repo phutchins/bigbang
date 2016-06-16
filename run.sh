@@ -67,7 +67,7 @@ if [[ $platform == 'linux' ]]; then
       sudo pacman -S berkshelf
     fi
   fi
-if [[ $platform == 'osx' ]]; then
+elif [[ $platform == 'osx' ]]; then
 	if ! gem list berkshelf; then
 		echo "Installing Berkshelf..."
 		gem install berkshelf
