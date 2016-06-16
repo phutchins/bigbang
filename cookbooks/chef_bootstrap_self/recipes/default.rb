@@ -9,6 +9,7 @@ METADATA_PARAMS = ['CHEF_RUN_LIST', 'CHEF_VALIDATION_BASE64', 'CHEF_SERVER', 'CH
 
 # If target is GCP, get metadata from the API and set defaults if it didn't exist
 METADATA_PARAMS.each do |param|
+  result = ''
   if TARGET == "GCP"
     bash 'get_param' do
       code <<-EOH
