@@ -97,7 +97,7 @@ if [[ $RVM_EXIT != 0 ]]; then
   echo "Sourcing RVM script so we can start using ruby"
   source /usr/local/rvm/scripts/rvm
 else
-  echo "Found RVM version $RVM_VERSION"
+  echo "RVM is already installed"
 fi
 
 # Install bundler
@@ -140,7 +140,9 @@ fi
 # Want to be able to only pull the users specified initial cookbook,
 # do the bundle install and berks install and go
 
-echo "Running Runner..."
+echo "Running Runner from $HOME/.bigbang/run.sh ..."
+
+echo "Home is $HOME"
 
 # Run chef-zero using env var for run_list
 . "$HOME/.bigbang/run.sh"
