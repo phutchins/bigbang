@@ -1,4 +1,4 @@
-#!/usr/local/bin/bash
+#!/usr/bin/env bash
 
 # Init BigBang
 ## Check out big bang to .bigbang (allow to choose location during setup?)
@@ -39,7 +39,8 @@ fi
 # Install chef-zero
 if ! gem list --local chef-zero >/dev/null 2>&1; then
   echo "Installing Chef Zero..."
-  gem install chef-zero >/dev/null 2>&1
+  result=$(gem install chef-zero)
+  # Detect if this failed
   echo "done."
 else
   echo "Chef Zero Gem already installed."
