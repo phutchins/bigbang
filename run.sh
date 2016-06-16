@@ -11,7 +11,7 @@ BASE_DIR=$HOME/.bigbang
 . $BASE_DIR/util.sh --source-only
 
 # Should specify this via env if you want it true
-DEFAULT_INTERACTIVE_MODE=${INTERACTIVE_MODE:false}
+CONFIG_INTERACTIVE_MODE=${INTERACTIVE_MODE:false}
 CONFIG_HOSTNAME=$(hostname)
 CONFIG_CHEF_RUN_LIST=${CHEF_RUN_LIST:-$DEFAULT_CHEF_RUN_LIST}
 
