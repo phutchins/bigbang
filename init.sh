@@ -25,7 +25,51 @@ elif [[ "$unamestr" == 'Darwin' ]]; then
    platform='osx'
 fi
 
+# Should break this and isinstalled() out into a lib file
+install()
+{
+  if [ -z "$1" ] ; then
+    echo "Must supply package to install"
+  else
+    PACKAGE=$1
+
+		if [[ $platform == 'linux' ]]; then
+			if [[ $OS == 'Ubuntu' ]]; then
+				if ! [ "dpkg -s $PACKAGE" ] ; then
+					echo "Installing $PACKAGE"
+					sudo apt-get -y install $PACKAGE
+				fi
+			elif [[ $OS == 'CentOS' ]]; then
+				if ! [ "yum list installed | grep $PACKAGE" ]; then
+					echo "Installing $PACKAGE"
+					sudo yum -y install $PACKAGE
+				fi
+			elif [[ $OS == 'ARCH' ]]; then
+				if ! [ "pacman -Qs --noconfirm $PACKAGE" ]; then
+					echo "Installing $PACKAGE"
+					sudo pacman -S $PACKAGE
+				fi
+			fi
+		elif [[ $platform == 'osx' ]]; then
+			if [ ! -f /usr/local/bin/brew ]; then
+        echo "Installing Brew..."
+				ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
+			fi
+			if ! [ "brew list -1 | grep -q \"^${PACKAGE}\\\$\"" ]; then
+				brew install $PACKAGE
+			fi
+		fi
+  fi
+}
+
 # Need to install vendored ruby here
+
+# Install bundler
+if ! bundle -v >/dev/null 2>&1; then
+  echo "Installing bundler"
+  install bundler;
+  bundle install --path vendor/bundle
+fi
 
 # Install chef
 if ! gem list --local chef >/dev/null 2>&1; then
@@ -36,10 +80,16 @@ else
   echo "Chef Gem already installed."
 fi
 
+# Check for ruby
+
 # Install chef-zero
 if ! gem list --local chef-zero >/dev/null 2>&1; then
   echo "Installing Chef Zero..."
   result=$(gem install chef-zero)
+  if [[ "$result" != '0' ]] ; then
+    echo "Error installing chef-zero"
+    exit 1;
+  fi
   # Detect if this failed
   echo "done."
 else
