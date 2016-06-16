@@ -138,5 +138,7 @@ fi
 # Want to be able to only pull the users specified initial cookbook,
 # do the bundle install and berks install and go
 
+echo "Running Runner..."
+
 # Run chef-zero using env var for run_list
 . $HOME/.bigbang/run.sh

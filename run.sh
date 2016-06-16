@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
+# This script should provide you with options for what to install/run if in
+# interactive mode, and if not, it should run chef zero with the specified
+# runlist via ENV variable.
 
-BASE_DIR=$(pwd)
+#BASE_DIR=$(pwd)
+BASE_DIR=$HOME/.bigbang
 
 # Should specify this via env if you want it true
 DEFAULT_INTERACTIVE_MODE=${INTERACTIVE_MODE:false}
 CONFIG_HOSTNAME=$(hostname)
 
-if [ $CONFIG_INTERACTIVE_MODE = true ] ; then
+if [ $CONFIG_INTERACTIVE_MODE -eq true ] ; then
 	echo "Running BigBang in Interactive mode"
 
   # Run interactive mode function
@@ -76,6 +80,7 @@ elif [[ $platform == 'osx' ]]; then
 fi
 
 # Run Berkshelf to get all the needed cookbooks
+# Should only need to do this if running a local cookbook
 echo "Installing/updating cookbooks"
 cd $BASE_DIR/cookbooks/base && berks install
 
