@@ -64,7 +64,8 @@ install()
 
 # Need to install vendored ruby here
 RVM_VERSION=$(rvm -v)
-if ! $RVM_VERSION >/dev/null 2>&1; then
+RVM_EXIT=$?
+if ! $RVM_EXIT; then
   echo "RVM is not installed. Installing RVM and Ruby Stable."
   curl -sSL https://get.rvm.io | bash -s stable --ruby >/dev/null;
 else
