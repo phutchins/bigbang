@@ -23,12 +23,14 @@ CONFIG_MODE=${BIGBANG_MODE:-$DEFAULT_MODE}
 # Set the bigbang run list
 # If we're in ZERO mode, we just use the rulist provided
 if [[ $CONFIG_MODE == "ZERO" ]] ; then
+  echo "Running in CONFIG mode ZERO"
   CONFIG_CHEF_ZERO_RUN_LIST=${CHEF_RUN_LIST:-$DEFAULT_CHEF_ZERO_RUN_LIST}
 fi
 
 # If we're in BOOTSTRAP mode, we set the bigbang runlist to 'recipe[chef_bootstrap_self]'
 # and use the supplied runlist to pass along to chef-client
 if [[ $CONFIG_MODE == "BOOTSTRAP" ]] ; then
+  echo "Running in CONFIG mode BOOTSTRAP"
   CONFIG_CHEF_ZERO_RUN_LIST="recipe[chef_bootstrap_self]"
   CONFIG_CHEF_RUN_LIST=${CHEF_RUN_LIST:-$DEFAULT_CHEF_RUN_LIST}
 fi
