@@ -67,6 +67,7 @@ RVM_VERSION=$(rvm -v)
 RVM_EXIT=$?
 if ! $RVM_EXIT; then
   echo "RVM is not installed. Installing RVM and Ruby Stable."
+  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
   curl -sSL https://get.rvm.io | bash -s stable --ruby >/dev/null;
 else
   echo "Found RVM version $RVM_VERSION"
