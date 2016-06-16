@@ -41,19 +41,28 @@ install()
 
 		if [[ $platform == 'linux' ]]; then
 			if [[ $OS == 'Ubuntu' ]]; then
-				if ! [ "dpkg -s $PACKAGE" ] ; then
+        dpkg -s $PACKAGE >/dev/null 2>&1
+				if [ $? -ne 0 ] ; then
 					echo "Installing $PACKAGE"
 					sudo apt-get -y install $PACKAGE
+        else
+          echo "$PACKAGE already installed"
 				fi
 			elif [[ $OS == 'CentOS' ]]; then
-				if ! [ "yum list installed | grep $PACKAGE" ]; then
+        yum list installed | grep $PACKAGE >/dev/null 2>&1
+				if [ $? -ne 0 ]; then
 					echo "Installing $PACKAGE"
 					sudo yum -y install $PACKAGE
+        else
+          echo "$PACKAGE already installed"
 				fi
 			elif [[ $OS == 'ARCH' ]]; then
-				if ! [ "pacman -Qs --noconfirm $PACKAGE" ]; then
+        pacman -Qs $PACKAGE >/dev/null 2>&1
+				if [ $? -ne 0 ]; then
 					echo "Installing $PACKAGE"
-					sudo pacman -S $PACKAGE
+					sudo pacman -S --noconfirm $PACKAGE
+        else
+          echo "$PACKAGE already installed"
 				fi
 			fi
 		elif [[ $platform == 'osx' ]]; then
