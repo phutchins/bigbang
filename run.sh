@@ -15,7 +15,9 @@ DEFAULT_INTERACTIVE_MODE=${INTERACTIVE_MODE:false}
 CONFIG_HOSTNAME=$(hostname)
 CONFIG_CHEF_RUN_LIST=${CHEF_RUN_LIST:-$DEFAULT_CHEF_RUN_LIST}
 
-if [ "$CONFIG_INTERACTIVE_MODE" -eq "true" ] ; then
+echo "Running with run_list '$CONFIG_CHEF_RUN_LIST'"
+
+if [ $CONFIG_INTERACTIVE_MODE == "true" ] ; then
 	echo "Running BigBang in Interactive mode"
 
   # Run interactive mode function
