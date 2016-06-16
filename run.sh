@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
 BASE_DIR=$(pwd)
+DEFAULT_RUN_LIST='recipe[chef-base]'
+FINAL_RUN_LIST=${RUN_LIST:-$DEFAULT_RUN_LIST}
 
 echo "Running BigBang"
 
@@ -30,6 +32,6 @@ fi
 cd $BASE_DIR/cookbooks/base && berks vendor $BASE_DIR/vendor_cookbooks
 
 # Run base bigbang recipe
-cd $BASE_DIR && chef-client -z -j config/client.rb -r "recipe[base]"
+cd $BASE_DIR && chef-client -z -j config/client.rb -r $FINAL_RUN_LIST
 
 # Run user selected recipe
