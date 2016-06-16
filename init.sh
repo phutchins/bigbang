@@ -143,4 +143,4 @@ fi
 echo "Running Runner..."
 
 # Run chef-zero using env var for run_list
-. $HOME/.bigbang/run.sh
+. "$HOME/.bigbang/run.sh"

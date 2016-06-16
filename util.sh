@@ -53,10 +53,10 @@ gem_install()
   fi
 
   GEM=$1
-  echo "Installing Gem $GEM"
 
   gem list -i $GEM >/dev/null 2>&1
   if [ $? -ne 0 ] ; then
+    echo "Installing Gem $GEM"
     gem install $GEM
   else
     echo "Gem $GEM already installed..."
