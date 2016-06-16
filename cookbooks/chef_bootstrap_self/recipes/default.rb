@@ -37,8 +37,8 @@ end
 # Create client.rb chef config
 template "/etc/chef/client.rb" do
   variables ({
-    CONFIG_CHEF_SERVER: node['chef_bootstrap_self']['config']['chef_server'],
-    CONFIG_CHEF_VALIDATOR_NAME: node['chef_bootstrap_self']['config']['validator_name'],
+    CONFIG_CHEF_SERVER: node['chef_bootstrap_self']['config']['CHEF_SERVER'],
+    CONFIG_CHEF_VALIDATION_NAME: node['chef_bootstrap_self']['config']['CHEF_VALIDATION_NAME'],
     CONFIG_HOSTNAME: node['hostname']
   })
   action :create
