@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 BASE_DIR=$(pwd)
-DEFAULT_RUN_LIST='recipe[chef-base]'
+DEFAULT_CHEF_RUN_LIST='recipe[chef-base]'
 DEFAULT_INTERACTIVE_MODE=false
-FINAL_RUN_LIST=${RUN_LIST:-$DEFAULT_RUN_LIST}
+CONFIG_CHEF_RUN_LIST=${CHEF_RUN_LIST:-$DEFAULT_CHEF_RUN_LIST}
+CONFIG_CHEF_VALIDATION=$CHEF_VALIDATION
+CONFIG_CHEF_SERVER=$CHEF_SERVER
 CONFIG_INTERACTIVE_MODE=${INTERACTIVE_MODE:-$DEFAULT_INTERACTIVE_MODE}
 
 if [ $CONFIG_INTERACTIVE_MODE = true ] ; then
@@ -87,6 +89,6 @@ fi
 cd $BASE_DIR/cookbooks/base && berks vendor $BASE_DIR/vendor_cookbooks
 
 # Run base bigbang recipe
-cd $BASE_DIR && chef-client -z -j config/client.rb -r $FINAL_RUN_LIST
+cd $BASE_DIR && chef-client -z -j config/client.rb -r $CONFIG_CHEF_RUN_LIST
 
 # Run user selected recipe
