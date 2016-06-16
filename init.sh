@@ -7,6 +7,8 @@
 ## Check out big bang to .bigbang (allow to choose location during setup?)
 
 ##
+# Import Helpers
+# Can't import helpers yet as we're curling this script...
 
 # Determine what OS we're running on
 unamestr=`uname`

@@ -3,6 +3,9 @@
 # interactive mode, and if not, it should run chef zero with the specified
 # runlist via ENV variable.
 
+# Import Helpers
+. ./util.sh --source-only
+
 #BASE_DIR=$(pwd)
 BASE_DIR=$HOME/.bigbang
 
@@ -53,31 +56,7 @@ fi
 # Also need to detect OS here
 # sudo chown -R `whoami`:staff /usr/local
 
-# Install Berkshelf
-if [[ $platform == 'linux' ]]; then
-  if [[ $OS == 'Ubuntu' ]]; then
-    if ! [ "dpkg -l | grep berkshelf" ] ; then
-      echo "Installing Berkshelf"
-      sudo apt-get install berkshelf
-    fi
-  elif [[ $OS == 'CentOS' ]]; then
-    if ! [ "yum list installed | grep berkshelf" ]; then
-      echo "Installing Berkshelf"
-      sudo yum install berkshelf
-    fi
-  elif [[ $OS == 'ARCH' ]]; then
-    if ! [ "which tmux" ]; then
-      echo "Installing Berkshelf"
-      sudo pacman -S berkshelf
-    fi
-  fi
-elif [[ $platform == 'osx' ]]; then
-	if ! gem list berkshelf; then
-		echo "Installing Berkshelf..."
-		gem install berkshelf
-		echo "Done."
-	fi
-fi
+install berkshelf
 
 # Run Berkshelf to get all the needed cookbooks
 # Should only need to do this if running a local cookbook
