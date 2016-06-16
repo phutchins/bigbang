@@ -13,6 +13,7 @@ BASE_DIR=$HOME/.bigbang
 # Should specify this via env if you want it true
 DEFAULT_INTERACTIVE_MODE=${INTERACTIVE_MODE:false}
 CONFIG_HOSTNAME=$(hostname)
+CONFIG_CHEF_RUN_LIST=${CHEF_RUN_LIST:-$DEFAULT_CHEF_RUN_LIST}
 
 if [ "$CONFIG_INTERACTIVE_MODE" -eq "true" ] ; then
 	echo "Running BigBang in Interactive mode"
@@ -23,7 +24,7 @@ else
   echo "Running BigBang in Non Interactive mode"
 fi
 
-interactive ()
+interactive()
 {
   echo "please make a choice"
 }
