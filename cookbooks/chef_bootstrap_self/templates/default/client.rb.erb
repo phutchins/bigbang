@@ -1,0 +1,19 @@
+chef_server_url "<%= @CONFIG_CHEF_SERVER %>"
+client_fork true
+log_location "/var/log/chef/client.log"
+validation_client_name "<%= @CONFIG_CHEF_VALIDATOR_NAME %>"
+verify_api_cert true
+node_name "<%= @CONFIG_HOSTNAME %>"
+
+
+ohai.plugin_path << "/etc/chef/ohai_plugins"
+
+# Do not crash if a handler is missing / not installed yet
+begin
+rescue NameError => e
+  Chef::Log.error e
+end
+
+Dir.glob(File.join("/etc/chef", "client.d", "*.rb")).each do |conf|
+  Chef::Config.from_file(conf)
+end
