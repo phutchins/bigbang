@@ -27,7 +27,7 @@ DIRECTORIES.each do |dir|
 end
 
 # Decode validation pem and save to file
-VALIDATION = Base64.decode64(node['chef_bootstrap_self']['config']['CHEF_VALIDATION'])
+VALIDATION = Base64.decode64(node['chef_bootstrap_self']['config']['CHEF_VALIDATION_BASE64'])
 
 file '/etc/chef/validation.pem' do
   content VALIDATION
