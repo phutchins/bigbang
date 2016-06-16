@@ -13,7 +13,9 @@ METADATA_PARAMS.each do |param|
   result = `curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/#{param}" -H "Metadata-Flavor: Google"`
   end
 
-  node.set['chef_bootstrap_self']['config'][param] = result || node['chef_bootstrap_self']['defaults'][param]
+  Chef::Log.info("Result from attribute request is: #{result}")
+
+  node.set['chef_bootstrap_self']['config']["#{param}"] = result || node['chef_bootstrap_self']['defaults']["#{param}"]
 end
 
 # Create directories for chef configs and chef logs
