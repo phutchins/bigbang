@@ -17,7 +17,7 @@ CONFIG_CHEF_RUN_LIST=${CHEF_RUN_LIST:-$DEFAULT_CHEF_RUN_LIST}
 
 echo "Running with run_list '$CONFIG_CHEF_RUN_LIST'"
 
-if [ $CONFIG_INTERACTIVE_MODE == "true" ] ; then
+if [[ $CONFIG_INTERACTIVE_MODE == "true" ]] ; then
 	echo "Running BigBang in Interactive mode"
 
   # Run interactive mode function
