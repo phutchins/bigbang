@@ -63,12 +63,16 @@ install()
 }
 
 # Need to install vendored ruby here
-RVM_VERSION=$(rvm -v)
+RVM_VERSION=$(rvm -v>/dev/null 2>&1)
 RVM_EXIT=$?
-if ! $RVM_EXIT; then
+if [[ $RVM_EXIT != 0 ]]; then
   echo "RVM is not installed. Installing RVM and Ruby Stable."
-  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-  curl -sSL https://get.rvm.io | bash -s stable --ruby >/dev/null;
+  echo "Adding keyserver for RVM"
+  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 >/dev/null 2>&1
+  echo "Installing RVM"
+  curl -sSL https://get.rvm.io | bash -s stable --ruby >/dev/null 2>&1
+  echo "Sourcing RVM script so we can start using ruby"
+  source /usr/local/rvm/scripts/rvm
 else
   echo "Found RVM version $RVM_VERSION"
 fi
