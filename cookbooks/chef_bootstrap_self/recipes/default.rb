@@ -5,7 +5,7 @@ require 'base64'
 # Determine our target from env or use default
 TARGET = ENV['TARGET'] || node['chef_bootstrap_self']['defaults']['TARGET']
 
-METADATA_PARAMS = ['CHEF_RUN_LIST', 'CHEF_VALIDATION_BASE64', 'CHEF_SERVER', 'CHEF_VALIDATION_NAME']
+METADATA_PARAMS = ['CHEF_RUN_LIST', 'CHEF_VALIDATION_BASE64', 'CHEF_SERVER', 'CHEF_VALIDATION_NAME', 'CHEF_ENVIRONMENT']
 
 # If target is GCP, get metadata from the API and set defaults if it didn't exist
 METADATA_PARAMS.each do |param|
@@ -42,4 +42,28 @@ template "/etc/chef/client.rb" do
     CONFIG_HOSTNAME: node['hostname']
   })
   action :create
+end
+
+# Write out a JSON file for first chef-client run
+# Should include:
+# - run_list
+# - environment
+
+FIRSTBOOT = <<-JSON
+{
+  "run_list": #{node['chef_bootstrap_self']['config']['CHEF_RUN_LIST']},
+  "chef_environment": #{node['chef_bootstrap_self']['config']['CHEF_ENVIRONMENT']}
+}
+JSON
+
+file '/etc/chef/firstboot.json' do
+  content FIRSTBOOT
+  action :create
+end
+
+# Run chef-client (use chef-client cookbook?)
+bash 'firstboot_chef_run' do
+  code <<-EOH
+    chef-client -j /etc/chef/firstboot.json
+  EOH
 end

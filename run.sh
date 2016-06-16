@@ -10,10 +10,29 @@ BASE_DIR=$HOME/.bigbang
 # Import Helpers
 . $BASE_DIR/util.sh --source-only
 
+# Defaults
+DEFAULT_CHEF_ZERO_RUN_LIST="recipe[base]"
+DEFAULT_CHEF_RUN_LIST=""
+DEFAULT_MODE=ZERO
+
 # Should specify this via env if you want it true
 CONFIG_INTERACTIVE_MODE=${INTERACTIVE_MODE:false}
 CONFIG_HOSTNAME=$(hostname)
-CONFIG_CHEF_RUN_LIST=${CHEF_RUN_LIST:-$DEFAULT_CHEF_RUN_LIST}
+CONFIG_MODE=${BIGBANG_MODE:-$DEFAULT_MODE}
+
+# Set the bigbang run list
+# If we're in ZERO mode, we just use the rulist provided
+if [[ $CONFIG_MODE == "ZERO" ]] ; then
+  CONFIG_CHEF_ZERO_RUN_LIST=${CHEF_RUN_LIST:-$DEFAULT_CHEF_ZERO_RUN_LIST}
+fi
+
+# If we're in BOOTSTRAP mode, we set the bigbang runlist to 'recipe[chef_bootstrap_self]'
+# and use the supplied runlist to pass along to chef-client
+if [[ $CONFIG_MODE == "BOOTSTRAP" ]] ; then
+  CONFIG_CHEF_ZERO_RUN_LIST="recipe[chef_bootstrap_self]"
+  CONFIG_CHEF_RUN_LIST=${CHEF_RUN_LIST:-$DEFAULT_CHEF_RUN_LIST}
+fi
+
 
 echo "Running with run_list '$CONFIG_CHEF_RUN_LIST'"
 
@@ -75,6 +94,6 @@ fi
 cd $BASE_DIR/cookbooks/base && berks vendor $BASE_DIR/vendor_cookbooks
 
 # Run base bigbang recipe
-cd $BASE_DIR && chef-client -z -j config/client.rb -r $CONFIG_CHEF_RUN_LIST
+cd $BASE_DIR && chef-client -z -j config/client.rb -r $CONFIG_CHEF_ZERO_RUN_LIST
 
 # Run user selected recipe
