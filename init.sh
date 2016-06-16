@@ -37,6 +37,7 @@ install()
     echo "Must supply package to install"
   else
     PACKAGE=$1
+    echo "Installing package $PACKAGE"
 
 		if [[ $platform == 'linux' ]]; then
 			if [[ $OS == 'Ubuntu' ]]; then
