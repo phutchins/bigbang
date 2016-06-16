@@ -3,6 +3,16 @@
 # interactive mode, and if not, it should run chef zero with the specified
 # runlist via ENV variable.
 
+# Command line ENV Options
+# BIGBANG_MODE - [ ZERO ] BOOTSTRAP
+# TARGET - [ GCP ] N/A
+
+# GCP Metadata Options
+# CHEF_VALIDATION_BASE64
+# CHEF_RUN_LIST
+# CHEF_SERVER
+# CHEF_VALIDATION_NAME
+# CHEF_ENVIRONMENT
 
 #BASE_DIR=$(pwd)
 BASE_DIR=$HOME/.bigbang
@@ -18,7 +28,10 @@ DEFAULT_MODE=ZERO
 # Should specify this via env if you want it true
 CONFIG_INTERACTIVE_MODE=${INTERACTIVE_MODE:false}
 CONFIG_HOSTNAME=$(hostname)
+
+# Should we bother getting this config mode from the metadata api?
 CONFIG_MODE=${BIGBANG_MODE:-$DEFAULT_MODE}
+
 
 # Set the bigbang run list
 # If we're in ZERO mode, we just use the rulist provided
