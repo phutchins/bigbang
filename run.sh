@@ -14,7 +14,7 @@ BASE_DIR=$HOME/.bigbang
 DEFAULT_INTERACTIVE_MODE=${INTERACTIVE_MODE:false}
 CONFIG_HOSTNAME=$(hostname)
 
-if [ $CONFIG_INTERACTIVE_MODE -eq true ] ; then
+if [ "$CONFIG_INTERACTIVE_MODE" -eq "true" ] ; then
 	echo "Running BigBang in Interactive mode"
 
   # Run interactive mode function
