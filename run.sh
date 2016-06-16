@@ -56,7 +56,7 @@ fi
 # Also need to detect OS here
 # sudo chown -R `whoami`:staff /usr/local
 
-install berkshelf
+gem_install berkshelf
 
 # Run Berkshelf to get all the needed cookbooks
 # Should only need to do this if running a local cookbook

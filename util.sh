@@ -46,3 +46,19 @@ install()
   fi
 }
 
+gem_install()
+{
+  if [ -z "$1" ] ; then
+    echo "Must supply gem name to install"
+  fi
+
+  GEM=$1
+  echo "Installing Gem $GEM"
+
+  gem list -i $GEM
+  if [ $? -ne 0 ] ; then
+    gem install $GEM
+  else
+    echo "Gem $GEM already installed..."
+  fi
+}
