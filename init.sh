@@ -127,4 +127,4 @@ fi
 # do the bundle install and berks install and go
 
 # Run chef-zero using env var for run_list
-./run.sh
+. $HOME/.bigbang/run.sh
