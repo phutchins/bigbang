@@ -44,3 +44,6 @@ if ! gem list --local chef-zero >/dev/null 2>&1; then
 else
   echo "Chef Zero Gem already installed."
 fi
+
+# Run chef-zero using env var for run_list
+./run.sh
