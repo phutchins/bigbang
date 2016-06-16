@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 
 # Init BigBang
+# This script should determine what OS you're running, and set up the necessary
+# bits for installing chef-zero.
+
 ## Check out big bang to .bigbang (allow to choose location during setup?)
 
 ##
@@ -62,7 +65,13 @@ install()
   fi
 }
 
-# Need to install vendored ruby here
+# Check out the repo so we can run against our cookbooks
+install git;
+if ! [ -d "$HOME/.bigbang" ] ; then
+  git clone https://github.com/phutchins/bigbang.git ~/.bigbang
+fi
+
+# Need to install vendored ruby here (installing rvm for now...)
 RVM_VERSION=$(rvm -v)
 RVM_EXIT=$?
 if [[ $RVM_EXIT != 0 ]]; then
@@ -81,8 +90,9 @@ fi
 if ! bundle -v >/dev/null 2>&1; then
   echo "Installing bundler"
   install bundler;
-  bundle install --path vendor/bundle
-  bundle install --binstubs
+  # Don't want to bundle here
+  # bundle install --path vendor/bundle
+  # bundle install --binstubs
 fi
 
 # Install chef
@@ -109,6 +119,12 @@ if ! gem list -i chef-zero >/dev/null 2>&1; then
 else
   echo "Chef Zero Gem already installed."
 fi
+
+# Should use curl here to run the ruh.sh script in case we don't want
+# to check out the repo
+
+# Want to be able to only pull the users specified initial cookbook,
+# do the bundle install and berks install and go
 
 # Run chef-zero using env var for run_list
 ./run.sh
