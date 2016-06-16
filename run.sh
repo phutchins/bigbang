@@ -3,11 +3,12 @@
 # interactive mode, and if not, it should run chef zero with the specified
 # runlist via ENV variable.
 
-# Import Helpers
-. ./util.sh --source-only
 
 #BASE_DIR=$(pwd)
 BASE_DIR=$HOME/.bigbang
+
+# Import Helpers
+. $BASE_DIR/util.sh --source-only
 
 # Should specify this via env if you want it true
 DEFAULT_INTERACTIVE_MODE=${INTERACTIVE_MODE:false}
