@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Init BigBang
 # This script should determine what OS you're running, and set up the necessary

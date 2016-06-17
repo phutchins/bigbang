@@ -108,6 +108,9 @@ fi
 
 cd $BASE_DIR/cookbooks/base && berks vendor $BASE_DIR/vendor_cookbooks
 
+# Need to find a way to set HOME ENV var here or ensure that it exists before this point
+# Chef is failing to check out the git repo because of that
+
 # Run base bigbang recipe
 cd $BASE_DIR && chef-client -z -j config/client.rb -r $CONFIG_CHEF_ZERO_RUN_LIST
 
