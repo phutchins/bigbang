@@ -17,6 +17,7 @@ echo "HOME_DIR_ENV: $HOME_DIR_ENV"
 HOME_DIR=`echo ${HOME_DIR_ENV##*=}`
 echo "HOME_DIR: $HOME_DIR"
 BASE_DIR="$HOME_DIR/.bigbang"
+echo "BASE_DIR: $BASE_DIR"
 BASE_DIR2="~/.bigbang"
 
 # Determine what OS we're running on
