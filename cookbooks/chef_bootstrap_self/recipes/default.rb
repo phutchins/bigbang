@@ -10,7 +10,7 @@ METADATA_PARAMS = ['CHEF_RUN_LIST', 'CHEF_VALIDATION_BASE64', 'CHEF_SERVER', 'CH
 # If target is GCP, get metadata from the API and set defaults if it didn't exist
 METADATA_PARAMS.each do |param|
   if TARGET == "GCP"
-  result = `curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/#{param}" -H "Metadata-Flavor: Google"`
+    result = `curl "http://metadata.google.internal/computeMetadata/v1/instance/attributes/#{param}" -H "Metadata-Flavor: Google"`
   end
 
   Chef::Log.info("Result from attribute request is: #{result}")
@@ -51,8 +51,8 @@ end
 
 FIRSTBOOT = <<-JSON
 {
-  "run_list": #{node['chef_bootstrap_self']['config']['CHEF_RUN_LIST']},
-  "chef_environment": #{node['chef_bootstrap_self']['config']['CHEF_ENVIRONMENT']}
+  "run_list": "#{node['chef_bootstrap_self']['config']['CHEF_RUN_LIST']}",
+  "chef_environment": "#{node['chef_bootstrap_self']['config']['CHEF_ENVIRONMENT']}"
 }
 JSON
 

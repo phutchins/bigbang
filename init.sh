@@ -10,6 +10,8 @@
 # Import Helpers
 # Can't import helpers yet as we're curling this script...
 
+BASE_DIR="$HOME/.bigbang"
+
 # Determine what OS we're running on
 unamestr=`uname`
 if [[ "$unamestr" == 'Linux' ]]; then
