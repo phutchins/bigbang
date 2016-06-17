@@ -10,6 +10,8 @@
 # Import Helpers
 # Can't import helpers yet as we're curling this script...
 
+USERNAME=`whoami`
+HOME_DIR=`su - $USERNAME -c /usr/bin/env | grep "^HOME="`
 BASE_DIR="$HOME/.bigbang"
 BASE_DIR2="~/.bigbang"
 
@@ -143,8 +145,8 @@ fi
 # Want to be able to only pull the users specified initial cookbook,
 # do the bundle install and berks install and go
 
-echo "Running Runner from $BASE_DIR2/run.sh ..."
+echo "Running Runner from $HOME_DIR/run.sh ..."
 
 # Run chef-zero using env var for run_list
 env
-. $BASE_DIR2/run.sh
+. $HOME_DIR/run.sh
