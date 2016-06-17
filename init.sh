@@ -11,8 +11,11 @@
 # Can't import helpers yet as we're curling this script...
 
 USERNAME=`whoami`
+echo "USERNAME: $USERNAME"
 HOME_DIR_ENV=`su - $USERNAME -c /usr/bin/env | grep "^HOME="`
-HOME_DIR=`echo ${HOME_DIR##*=}`
+echo "HOME_DIR_ENV: $HOME_DIR_ENV"
+HOME_DIR=`echo ${HOME_DIR_ENV##*=}`
+echo "HOME_DIR: $HOME_DIR"
 BASE_DIR="$HOME/.bigbang"
 BASE_DIR2="~/.bigbang"
 
