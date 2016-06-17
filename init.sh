@@ -153,5 +153,7 @@ fi
 echo "Running Runner from $BASE_DIR/run.sh ..."
 
 # Run chef-zero using env var for run_list
+export HOME=$HOME_DIR
 env
+
 . $BASE_DIR/run.sh
