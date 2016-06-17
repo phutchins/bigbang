@@ -145,4 +145,4 @@ fi
 echo "Running Runner from $BASE_DIR/run.sh ..."
 
 # Run chef-zero using env var for run_list
-/usr/bin/env bash "$BASE_DIR/run.sh"
+/usr/bin/env bash -l "$BASE_DIR/run.sh"
