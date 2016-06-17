@@ -16,7 +16,7 @@ HOME_DIR_ENV=`su - $USERNAME -c /usr/bin/env | grep "^HOME="`
 echo "HOME_DIR_ENV: $HOME_DIR_ENV"
 HOME_DIR=`echo ${HOME_DIR_ENV##*=}`
 echo "HOME_DIR: $HOME_DIR"
-BASE_DIR="$HOME/.bigbang"
+BASE_DIR="$HOME_DIR/.bigbang"
 BASE_DIR2="~/.bigbang"
 
 # Determine what OS we're running on
