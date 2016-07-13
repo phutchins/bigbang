@@ -96,6 +96,9 @@ fi
 
 gem_install berkshelf
 
+# Install the bundle for bigbang
+cd $BASE_DIR && bundle install
+
 # Run Berkshelf to get all the needed cookbooks
 # Should only need to do this if running a local cookbook
 echo "Installing/updating cookbooks"
