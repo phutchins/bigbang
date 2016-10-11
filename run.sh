@@ -97,6 +97,7 @@ fi
 gem_install berkshelf
 
 # Install the bundle for bigbang
+# Shouldn't do this as root, but how should we do it??
 cd $BASE_DIR && bundle install
 
 # Run Berkshelf to get all the needed cookbooks

@@ -103,7 +103,7 @@ if [[ $RVM_EXIT != 0 ]]; then
   echo "Adding keyserver for RVM"
   gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 >/dev/null 2>&1
   echo "Installing RVM"
-  curl -sSL https://get.rvm.io | bash -s stable --ruby=2.2.0 >/dev/null 2>&1
+  curl -sSL https://get.rvm.io | bash -s stable --ruby=2.2.2 >/dev/null 2>&1
   echo "Sourcing RVM script so we can start using ruby"
   source /usr/local/rvm/scripts/rvm
 else
