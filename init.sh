@@ -113,7 +113,7 @@ fi
 # Install bundler
 if ! bundle -v >/dev/null 2>&1; then
   echo "Installing bundler"
-  install bundler;
+  install bundler -v 1.12.5;
   # Don't want to bundle here
   # bundle install --path vendor/bundle
   # bundle install --binstubs
