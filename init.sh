@@ -113,7 +113,10 @@ fi
 # Install bundler
 if ! bundle -v >/dev/null 2>&1; then
   echo "Installing bundler"
-  install bundler -v 1.12.5;
+  # Installing bundler with gem so we can pin it to avoid a bug
+  gem install bundler -v 1.12.5;
+
+  #install bundler -v 1.12.5;
   # Don't want to bundle here
   # bundle install --path vendor/bundle
   # bundle install --binstubs
@@ -127,6 +130,10 @@ if ! gem list -i chef >/dev/null 2>&1; then
 else
   echo "Chef Gem already installed."
 fi
+
+# Hack to downgrade Bundler to avoid bug w/ chef
+#gem uninstall -aIx bundler
+#gem install bundler -v 1.12.5;
 
 # Check for ruby
 
