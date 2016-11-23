@@ -95,26 +95,32 @@ if ! [ -d "$HOME/.bigbang" ] ; then
   git clone https://github.com/phutchins/bigbang.git ~/.bigbang
 fi
 
-# Need to install vendored ruby here (installing rvm for now...)
-rvm -v>/dev/null 2>&1
-RVM_EXIT=$?
-if [[ $RVM_EXIT != 0 ]]; then
-  echo "RVM is not installed. Installing RVM and Ruby Stable."
-  echo "Adding keyserver for RVM"
-  gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 >/dev/null 2>&1
-  echo "Installing RVM"
-  curl -sSL https://get.rvm.io | bash -s stable --ruby=2.2.2 >/dev/null 2>&1
-  echo "Sourcing RVM script so we can start using ruby"
-  source /usr/local/rvm/scripts/rvm
+ruby_install_type='system'
+
+if [ $ruby_install_type = 'rvm' ]; then
+  apt-get install -y ruby-dev
 else
-  echo "RVM is already installed"
+  # Need to install vendored ruby here (installing rvm for now...)
+  rvm -v>/dev/null 2>&1
+  RVM_EXIT=$?
+  if [[ $RVM_EXIT != 0 ]]; then
+    echo "RVM is not installed. Installing RVM and Ruby Stable."
+    echo "Adding keyserver for RVM"
+    gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 >/dev/null 2>&1
+    echo "Installing RVM"
+    curl -sSL https://get.rvm.io | bash -s stable --ruby=2.3.3 >/dev/null 2>&1
+    echo "Sourcing RVM script so we can start using ruby"
+    source /usr/local/rvm/scripts/rvm
+  else
+    echo "RVM is already installed"
+  fi
 fi
 
 # Install bundler
 if ! bundle -v >/dev/null 2>&1; then
   echo "Installing bundler"
   # Installing bundler with gem so we can pin it to avoid a bug
-  gem install bundler -v 1.12.5;
+  gem install bundler -v 1.13.6;
 
   #install bundler -v 1.12.5;
   # Don't want to bundle here
