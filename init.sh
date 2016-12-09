@@ -98,8 +98,6 @@ fi
 ruby_install_type='system'
 
 if [ $ruby_install_type = 'rvm' ]; then
-  apt-get install -y ruby-dev
-else
   # Need to install vendored ruby here (installing rvm for now...)
   rvm -v>/dev/null 2>&1
   RVM_EXIT=$?
@@ -114,6 +112,8 @@ else
   else
     echo "RVM is already installed"
   fi
+else
+  apt-get install -y ruby2.3 ruby2.3-dev
 fi
 
 # Install bundler
