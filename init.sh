@@ -113,6 +113,7 @@ if [ $ruby_install_type = 'rvm' ]; then
     echo "RVM is already installed"
   fi
 else
+  apt-get update
   apt-get install -y ruby2.3 ruby2.3-dev ruby-dev build-essential
 fi
 
