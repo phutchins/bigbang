@@ -19,6 +19,9 @@ echo "HOME_DIR: $HOME_DIR"
 BASE_DIR="$HOME_DIR/.bigbang"
 echo "BASE_DIR: $BASE_DIR"
 BASE_DIR2="~/.bigbang"
+# You can override this using $CHEF_VERSION environment variable
+CHEF_VERSION=${CHEF_VERSION:-12.19.36}
+echo "CHEF_VERSION: $CHEF_VERSION"
 
 # Determine what OS we're running on
 unamestr=`uname`
@@ -132,7 +135,7 @@ fi
 # Install chef
 if ! gem list -i chef >/dev/null 2>&1; then
   echo "Installing Chef..."
-  gem install chef >/dev/null 2>&1
+  gem install chef -i $CHEF_VERSION >/dev/null 2>&1
   echo "done."
 else
   echo "Chef Gem already installed."
