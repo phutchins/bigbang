@@ -22,6 +22,8 @@ BASE_DIR2="~/.bigbang"
 # You can override this using $CHEF_VERSION environment variable
 CHEF_VERSION=${CHEF_VERSION:-12.19.36}
 echo "CHEF_VERSION: $CHEF_VERSION"
+CHEF_ZERO_VERSION=${CHEF_ZERO_VERSION:-5.3.2}
+echo "CHEF_ZERO_VERSION: $CHEF_ZERO_VERSION"
 
 # Determine what OS we're running on
 unamestr=`uname`
@@ -135,7 +137,7 @@ fi
 # Install chef
 if ! gem list -i chef >/dev/null 2>&1; then
   echo "Installing Chef..."
-  gem install chef -i $CHEF_VERSION >/dev/null 2>&1
+  gem install chef -v $CHEF_VERSION >/dev/null 2>&1
   echo "done."
 else
   echo "Chef Gem already installed."
@@ -150,7 +152,7 @@ fi
 # Install chef-zero
 if ! gem list -i chef-zero >/dev/null 2>&1; then
   echo "Installing Chef Zero..."
-  result=$(gem install chef-zero)
+  result=$(gem install chef-zero -v $CHEF_ZERO_VERSION)
   if [[ "$result" != '0' ]] ; then
     echo "Error installing chef-zero"
     exit 1;
